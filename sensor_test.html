@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title></title>
+        <script language="javascript">
+            var ws = new WebSocket("ws://192.168.0.16:8080/ws");
+            ws.onopen = function() {
+                ws.send("Hello");
+            };
+            ws.onmessage = function (evt) {
+                try {
+                    var obj = JSON.parse(evt.data);
+                    document.getElementById('temperature').innerHTML = obj["temperature"];
+                    document.getElementById('gyro_x').innerHTML = obj["gyro"]["x"];
+                    document.getElementById('gyro_y').innerHTML = obj["gyro"]["y"];
+                    document.getElementById('gyro_z').innerHTML = obj["gyro"]["z"];
+                    document.getElementById('accel_x').innerHTML = obj["accelerometer"]["x"];
+                    document.getElementById('accel_y').innerHTML = obj["accelerometer"]["y"];
+                    document.getElementById('accel_z').innerHTML = obj["accelerometer"]["z"];
+                    document.getElementById('rotate_x').innerHTML = obj["rotation"]["x"];
+                    document.getElementById('rotate_y').innerHTML = obj["rotation"]["y"];
+                } catch(e) {
+
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <div id="sensor_data">
+            temperature:<div id="temperature"></div><br />
+            gyro_x:<div id="gyro_x"></div><br />
+            gyro_y:<div id="gyro_y"></div><br />
+            gyro_z:<div id="gyro_z"></div><br />
+            accel_x:<div id="accel_x"></div><br />
+            accel_y:<div id="accel_y"></div><br />
+            accel_z:<div id="accel_z"></div><br />
+            rotate_x:<div id="rotate_x"></div><br />
+            rotate_y:<div id="rotate_y"></div><br />
+        </div>
+    </body>
+</html>
